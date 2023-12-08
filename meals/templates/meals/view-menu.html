@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+<div class="text-right">
+    {% if request.user.is_chef %}
+    <h1 class="icon-plus"></h1>
+    <button><a href="{% url 'add-menu' %}">Add Menu</a></button>
+    {% endif %}
+    {% if request.user.is_cook %}
+    <h1 class="icon-eye-open"></h1>
+   <button><a href="{% url 'view-booking-requests' %}">Booking Requests</a></button>
+   <h1 class="icon-eye-open"></h1>
+   <button><a href="{% url 'view-bookings' %}">View Bookings</a></button>
+   {% endif %}
+  </div>
+  
+
+  <div class="text-right">
+    {% if request.user.is_staff %}
+    <h1 class="icon-book"></h1>
+    <button><a href="{% url 'my-bookings' %}">My Boookings</a></button>
+    {% endif %}
+    
+  </div>
+
+<form action="{% url 'view-menu' %}" class="form-inline" method="get">
+    <input class="form-control mr-sm-6" type="date" value="{{search_query}}" name="search_query"  placeholder="Search" aria-label="Search" required>
+    <button class="btn btn-info" type="submit">Search</button>
+  </form>
+  <br>
+  {% include 'includes/alerts.html' %}
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-picture"></i>
+                    </span>
+                    <h5>Menu</h5>
+                </div>
+                <div class="widget-content">
+                <ul class="thumbnails">
+
+                    {% for menu in menu %}
+                            <li class="span2">
+                                <p>{{menu.date}}</p>
+                            <a class="thumbnail lightbox_trigger" href="{{menu.meal.image.url}}">
+                                <img src="{{menu.meal.image.url}}" alt="" >
+                            </a>
+                            {% load humanize %}
+                            <span>{{menu.meal.meal_name}}</span>
+                            <p>KSH: {{menu.meal.amount|floatformat|intcomma}}</p>
+                            
+                            {% if request.user.is_chef %}
+                            <p><a title="Delete Menu" href="{% url 'delete-menu' menu.id %}"><i class="icon-remove icon-white"></i>Delete</a></p>
+                            {% endif %}
+                            <div class="actions">
+                                <a title="Book Menu" href="{% url 'book-meal' menu.id %}"><i class="icon-plus icon-white"></i></a>
+                                {% if request.user.is_chef %}
+                                <a title="Update Menu" href=""><i class="icon-pencil icon-white"></i></a>
+                                
+                                {% endif %}
+                            </div>
+                        
+                        </li>
+                        {% endfor %}
+                     
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+</div>
+
+{%endblock%}

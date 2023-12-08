@@ -1,0 +1,135 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+<hr>
+
+ 
+    
+<div class="text-right">
+  <h1 class="icon-plus-sign"></h1>
+ <button><a href="{% url 'add-staff' %}">Add Staff</a></button>
+
+
+ <h1 class="icon-download"></h1>
+ <button><a href="{% url 'staff-report' %}">Print Staffs Report</a></button>
+</div>
+
+<form action="{% url 'staffs' %}" class="form-inline" method="get">
+  <input class="form-control mr-sm-6" type="text" value="{{search_query}}" name="search_query"  placeholder="Search" aria-label="Search" required>
+  <button class="btn btn-info" type="submit">Search</button>
+</form>
+
+<div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title">
+
+           <span class="icon"><i class="icon-th"></i></span> 
+          <h5>My Staff</h5> 
+
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered data-table">
+            <thead>
+              <tr>
+               
+                <th>Staff Number</th>
+                <th>FullName</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+                <th>Cook Role</th>
+                <th>Chef Role</th>
+                <th>Admin Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for staff in staff %}
+            
+           <tr {% if staff.is_active == False %} style="color: red;" {% endif %}>
+             
+              <td> {{staff.staff_number}} </td>
+              <td> {{staff.first_name}} {{staff.last_name}}</td>
+              <td> {{staff.email}} </td>
+              <td> {{staff.userprofile.gender}} </td>
+            
+              {% if staff.is_admin %}
+              <td>Admin</td>
+              {% elif staff.is_chef %}
+              <td>Chef</td>
+              {% elif staff.is_cook %}
+              <td>Cook</td>
+              {% else %}
+              <td>Staff</td>
+              {% endif %}
+              {% if staff.is_active %}
+              <td>Active</td>
+              {% else %}
+              <td>Suspended</td>
+              {% endif %}
+              <td>
+              {% if staff.is_active %}
+              <a class="tip-top" data-original-title="View Staff" href="{% url 'staff-account' staff.userprofile.id %}"> <i class="icon-eye-open"></i></a>   
+              <a class="tip-top" data-original-title="Deactivate Staff"  href="{% url 'deactivate-staff' staff.id %}"> <i class="icon-ban-circle"></i></a>
+              {% else %}
+              <a class="tip-top" data-original-title="Activate Staff" href="{% url 'activate-staff' staff.id %}"> <i class="icon-check"></i></a>
+              {% endif %}
+             
+              
+              
+              
+              
+              
+              
+               
+              </td>
+              {% if staff.is_active%}
+              <td>
+                {% if staff.is_cook %}
+                <a class="tip-top" data-original-title="remove Role" href="{% url 'remove-cook' staff.id %}"> <i class="icon-check"></i></a>
+                {% else %}
+                <a class="tip-top" data-original-title="Add Role" href="{% url 'make-cook' staff.id %}"> <i class="icon-remove-circle"></i></a>
+                {% endif %}
+              </td>
+              <td>
+                {% if staff.is_chef %}
+                <a class="tip-top" data-original-title="remove Role" href="{% url 'remove-chef' staff.id %}"> <i class="icon-check"></i></a>
+                {% else %}
+                <a class="tip-top" data-original-title="Add Role" href="{% url 'make-chef' staff.id %}"> <i class="icon-remove-circle"></i></a>
+                {% endif %}
+              </td>
+              
+              <td>
+                {% if staff.is_admin %}
+                <a class="tip-top" data-original-title="remove Role" href="{% url 'remove-admin' staff.id %}"> <i class="icon-check"></i></a>
+                {% else %}
+                <a class="tip-top" data-original-title="Add Role" href="{% url 'make-admin' staff.id %}"> <i class="icon-remove-circle"></i></a>
+                {% endif %}
+              </td>
+             
+            </tr>
+            {% else %}
+            <td></td>
+            <td></td>
+            <td></td>
+            {% endif %}
+            {% endfor %}
+             
+            
+             
+
+            </tbody>
+          </table>
+
+        </div>
+        </div>
+  </div>
+</div>
+
+{% include 'includes/pagination.html' with queryset=staff custom_range=custom_range %}
+
+
+{%endblock%}

@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+{% if request.user.is_chef %}
+<div class="text-right">
+    <h1 class="icon-plus-sign"></h1>
+   <button><a href="{% url 'add-meal' %}">Add Meal</a></button>
+  
+</div>
+{% endif %}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-picture"></i>
+                    </span>
+                    <h5>Meals</h5>
+                </div>
+                <div class="widget-content">
+                <ul class="thumbnails">
+
+                    {% for meal in meals %}
+                            <li class="span2">
+                            <a class="thumbnail lightbox_trigger" href="{{meal.image.url}}">
+                                <img src="{{meal.image.url}}" alt="" >
+                            </a>
+                            {% load humanize %}
+                            <p>KSH: {{meal.amount|floatformat|intcomma}}</p>
+                            {% if request.user.is_chef %}
+                            <div class="actions">
+                                <a title="update Meal" href="{% url 'update-meal' meal.id %}"><i class="icon-pencil icon-white"></i></a>
+                                <a title="Delete Meal" href="{% url 'delete-meal' meal.id %}"><i class="icon-remove icon-white"></i></a>
+                            </div>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                     
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+</div>
+
+{%endblock%}

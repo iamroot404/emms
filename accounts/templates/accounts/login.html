@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    
+<head>
+        <title>Employee Meals Management System</title><meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+            <!-- Favicons -->
+        <link href="{% static 'assets/img/fav-2.png' %}" rel="icon">
+        <link href="{% static 'assets/img/fav-1.png' %}" rel="apple-touch-icon">
+
+		<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/bootstrap-responsive.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/maruti-login.css' %}" />
+        
+
+    </head>
+    <body>
+
+<!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+
+               <span class="spinner-rotate"></span>
+               
+          </div>
+     </section>
+
+        <div id="loginbox">    
+            <!-- <h3 class="text-center"><img src="{% static 'img/medvx.png' %}" alt="Logo" /></h3> -->
+            <form id="loginform" class="form-vertical" method="POST" action="">
+                {% csrf_token %}
+				
+                 <div class="form-actions">
+                    </div>
+                    <h3 class="text-center">E.M.M.S</h3>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on"><i class="icon-user"></i></span><input type="text" name="staff_number" placeholder="Staff Number" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on"><i class="icon-lock"></i></span><input type="password" name="password" placeholder="Password" required/>
+                        </div>
+                    </div>
+                  
+                </div>
+
+              
+                
+                <div class="form-actions">
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-inverse" id="to-recover">Lost password?</a></span>
+                    <span class="pull-right"><input type="submit" class="btn btn-success" value="Login" /></span>
+                </div>
+            </form>
+            <form id="recoverform" action="#" class="form-vertical">
+				<p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
+				
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail address" />
+                        </div>
+                    </div>
+               
+                <div class="form-actions">
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-inverse" id="to-login">&laquo; Back to login</a></span>
+                    <span class="pull-right"><input type="submit" class="btn btn-info" value="Recover" /></span>
+                </div>
+              
+            </form>
+            <br>
+            {% include 'includes/alerts.html' %}
+        </div>
+        
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>  
+        <script src="{% static 'assets/js/maruti.login.js' %}"></script> 
+        <script>
+            setTimeout(function(){
+              $('#dmessage').fadeOut('slow')
+          }, 4000)
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,89 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+<hr>
+
+
+
+
+<form action="" class="form-inline" method="get">
+  <input class="form-control mr-sm-6" type="date" value="{{search_query}}" name="search_query"  placeholder="Search" aria-label="Search" required>
+  <button class="btn btn-info" type="submit">Search</button>
+</form>
+
+<div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title">
+
+           <span class="icon"><i class="icon-th"></i></span> 
+          <h5>My Bookings</h5> 
+
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered data-table">
+            <thead>
+              <tr>
+               
+                <th>Staff Number</th>
+                <th>FullName</th>
+                <th>Meal</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Approved By</th>
+                <th>Approval Date</th>
+           
+              </tr>
+            </thead>
+            <tbody>
+              {% for booking in bookings %}
+            
+           <tr >
+             
+              <td> {{booking.owner.owner.staff_number}} </td>
+              <td> {{booking.owner.owner.first_name}}  {{booking.owner.owner.last_name}}</td>
+              <td> {{booking.menu.meal.meal_name}} </td>
+              {% load humanize %}
+              <td> {{booking.menu.meal.amount|floatformat|intcomma}} </td>
+              <td> {{booking.menu.date}} </td>
+              <td>{{booking.approved_by.first_name}} {{booking.approved_by.last_name}}</td>
+              <td>{{booking.created_at}}</td>
+        
+             
+            </tr>
+           
+            {% endfor %}
+             
+           
+             
+
+            </tbody>
+          </table>
+
+          
+        </div>
+        </div>
+        <table class="table table-bordered data-table">
+            <thead>
+              <tr>
+                <th>Total Bookings</th>
+                <th>Total AMount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{bookings_count}}</td>
+                    {% load humanize %}
+                    <td>{{tot|floatformat|intcomma}}</td>
+                </tr>
+            </tbody>
+             </table>
+
+  </div>
+</div>
+
+
+
+
+{%endblock%}

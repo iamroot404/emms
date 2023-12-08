@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>All Staff</title>
+</head>
+<style type="text/css">
+  @page {
+      size: A4;
+      margin: 1cm;
+  }
+  .table, td, th {  
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  text-align: left;
+  }
+
+  .table {
+  border-collapse: collapse;
+  width: 100%;
+
+  }
+
+  .table th, td {
+  padding: 5px;
+  text-align: center;
+  }
+
+  .td{
+  word-break: inherit;
+  }
+
+  .list-group h3{
+      font-size: 3em;
+  }
+  .list-group p {
+      font-size: 1em;
+  }
+
+  
+
+</style>
+<body>
+
+    <div class="container">
+        <h2 class="text-center">Staff Report</h2>
+        <p class="text-center">({{staff_count}}) Staffs Registered in the system</p>            
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+             
+              
+                <th>Staff Number</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Home Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for  staff in  staff %}
+           
+            <tr>
+
+               
+              
+                <td>
+                    {{staff.staff_number}}
+                </td>
+    
+                <td>
+                    {{staff.first_name}} {{staff.last_name}}
+                </td>
+                <td>
+                    {{staff.username}}
+                </td>
+               
+               
+                <td>
+                    {{staff.phone_number}}
+                </td>
+                <td>
+                    {{staff.email}}
+                </td>
+                <td>
+                    {{staff.userprofile.gender}}
+                </td>
+                <td>
+                    {{staff.userprofile.city}}
+                </td>
+            </tr>
+            {% endfor %}
+           
+        
+          </tbody>
+        </table>
+      </div>
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+<hr>
+
+ 
+    
+
+
+<form action="" class="form-inline" method="get">
+  <input class="form-control mr-sm-6" type="text" value="{{search_query}}" name="search_query"  placeholder="Search" aria-label="Search" required>
+  <button class="btn btn-info" type="submit">Search</button>
+</form>
+
+<div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title">
+
+           <span class="icon"><i class="icon-th"></i></span> 
+          <h5>Booking Requests</h5> 
+
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered data-table">
+            <thead>
+              <tr>
+               
+                <th>Staff Number</th>
+                <th>FullName</th>
+                <th>Meal</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Action</th>
+           
+              </tr>
+            </thead>
+            <tbody>
+              {% for booking in booking_req %}
+            
+           <tr >
+             
+              <td> {{booking.owner.staff_number}} </td>
+              <td> {{booking.owner.first_name}} {{booking.owner.last_name}}</td>
+              <td> {{booking.menu.meal.meal_name}} </td>
+              {% load humanize %}
+              <td> {{booking.menu.meal.amount|floatformat|intcomma}} </td>
+              <td> {{booking.menu.date}} </td>
+              <td>
+                <a class="tip-top" data-original-title="Approve Booking"  href="{% url 'approve-booking-request' booking.id %}"> <i class="icon-check"></i></a>
+                <a class="tip-top" data-original-title="Cancel Booking"  href="{% url 'cancel-booking-request' booking.id %}"> <i class="icon-remove-circle"></i></a>
+            </td>
+        
+             
+            </tr>
+           
+            {% endfor %}
+             
+            
+             
+
+            </tbody>
+          </table>
+
+        </div>
+        </div>
+  </div>
+</div>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+<div class="container-fluid">
+    <div class="form-row ">
+   
+      <div class="span10">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-plus"></i> </span>
+            <h5>Add Meal</h5>
+          </div>
+          <div class="widget-content">
+            <form  method="POST" class="form-vertical" enctype="multipart/form-data">
+                {% csrf_token %}
+              
+                
+              <div class="control-group span3">
+                <label class="control-label">Meal Name :</label>
+                <div class="controls">
+                    {{form.meal_name}}
+                </div>
+              </div>
+              <div class="control-group span3">
+                <label class="control-label">Enter Meal Image :</label>
+                <div class="controls">
+                    {{form.image}}
+                </div>
+              </div>
+
+              <div class="control-group span3">
+                <label class="control-label">Meal Price :</label>
+                <div class="controls">
+                    {{form.amount}}
+                 
+                </div>
+              </div>
+
+              
+              <div class="container-fluid">
+    <div class="quick-actions_homepage">
+    <ul class="quick-actions">
+        <button type="submit" class="btn btn-large"><i class="icon icon-check"></i> Add Meal</button>
+          
+    </ul>
+   </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {% include 'includes/alerts.html' %}
+
+
+</div>
+</div>
+
+
+{%endblock%}

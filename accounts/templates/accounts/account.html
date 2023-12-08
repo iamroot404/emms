@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+
+
+<div class="container-fluid">
+    <div class="span4">
+          <div class="card-profile">
+          <img src="{{userprofile.profile_picture.url}}"  alt="{{userprofile.first_name}}" width="140" height="140" style="border-radius:50%">
+          <h3>{{userprofile.first_name}} {{userprofile.last_name}}</h3>
+          <h5>{{userprofile.staff_number}}</h5>
+          <h5>{{userprofile.phone_number}}</h5>
+          <p class="card-title">{{userprofile.email}}</p>
+          {% if userprofile.gender %}
+          <p class="card-title">{{userprofile.gender}}</p>
+          {% endif %}
+          {% if userprofile.city %}
+          <p class="card-title">{{userprofile.city}},{{userprofile.country}}</p>
+          {% endif %}
+          
+          
+       <br>
+        </div>
+    </div>  
+
+    
+
+  <div class="form-row">
+    <div class="span8">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-user"></i> </span>
+          <h5>Edit Account</h5>
+        </div>
+        <div class="widget-content">
+          <form action="#" method="POST" class="form-vertical" enctype="multipart/form-data">
+             {% csrf_token %}
+
+             {% for field in form %}
+            <div class="control-group span2">
+              <label class="control-label">{{field.label}}</label>
+              <div class="controls">
+                {{field}}
+              </div>
+            </div>
+            {% endfor %}
+            
+           
+            
+        
+            
+            
+      
+            <div class="container-fluid">
+              <div class="quick-actions_homepage">
+              <ul class="quick-actions">
+                <button type="submit" class="btn btn-large"><i class="icon-edit"></i> Edit Account</button>
+                    
+              </ul>
+             </div>
+         </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+
+</div> 
+
+
+{%endblock%}

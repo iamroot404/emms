@@ -1,0 +1,17 @@
+<div class="quick-actions_homepage">
+    <ul class="quick-actions">
+          <li> <a href="{% url 'dashboard' %}"> <i class="icon-dashboard"></i> My Dashboard </a> </li>
+          {% if request.user.is_admin %}
+          <li> <a href="{% url 'staffs' %}"> <i class="icon-people"></i> Manage Users </a> </li>
+          <li> <a href="{% url 'view-meals' %}"> <i class="icon-food"></i> Meals </a> </li>
+          {% endif %}
+          
+
+        
+          <li> <a href="{% url 'view-menu' %}"> <i class="icon-calendar"></i> Menu </a> </li>
+         
+          
+        </ul>
+        <hr>
+   </div>
+   

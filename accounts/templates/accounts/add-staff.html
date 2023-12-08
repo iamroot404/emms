@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+{% load static %}
+{%block content%}
+
+<div class="container-fluid">
+    <div class="form-row ">
+      <div class="span10">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-user"></i> </span>
+            <h5>Add Staff</h5>
+          </div>
+          <div class="widget-content">
+            <form action="{% url 'add-staff' %}" method="POST" class="form-vertical">
+                {% csrf_token %}
+              
+                
+              <div class="control-group span3">
+                <label class="control-label">First Name :</label>
+                <div class="controls">
+                    {{form.first_name}}
+                </div>
+              </div>
+              <div class="control-group span3">
+                <label class="control-label">Last Name :</label>
+                <div class="controls">
+                    {{form.last_name}}
+                </div>
+              </div>
+
+              <div class="control-group span3">
+                <label class="control-label">Email :</label>
+                <div class="controls">
+                    {{form.email}}
+                    {{ form.email.errors}}
+                </div>
+              </div>
+
+              <div class="control-group span3">
+                <label class="control-label">Phone Number :</label>
+                <div class="controls">
+                    {{form.phone_number}}
+                </div>
+              </div>
+              
+              <div class="control-group span3">
+                <label class="control-label">Enter Password :</label>
+                <div class="controls">
+                    {{form.password}}
+                    {{form.non_field_errors}}
+                </div>
+              </div>
+              <div class="control-group span3">
+                <label class="control-label">Confirm Password :</label>
+                <div class="controls">
+                    {{form.confirm_password}}
+                </div>
+              </div>
+              
+              
+              <div class="container-fluid">
+    <div class="quick-actions_homepage">
+    <ul class="quick-actions">
+        <button type="submit" class="btn btn-large"><i class="icon icon-check"></i> Add Staff</button>
+          
+    </ul>
+   </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+ 
+
+
+</div>
+</div>
+
+
+{%endblock%}
